@@ -5,11 +5,10 @@ const hostname = '127.0.0.1';
 const port = 3000;
 
 const server = http.createServer((req, res) => {
-  console.log(req.method, req.url)
   
-  // if (req.url === '/favicon.ico') {
-  //   return 
-  // }
+  if (req.url === '/favicon.ico') {
+    return 
+  }
   if (req) {
         console.log('A request');
         res.statusCode = 200;
