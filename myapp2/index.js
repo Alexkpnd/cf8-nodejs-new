@@ -5,7 +5,8 @@ const port = 3000;
 app.use(express.json());
 app.use(express.urlencoded({exteded:true}))
 
-app.use('/', express.static('static_files'));
+// app.use('/', express.static('static_files'));
+app.set('view engine', 'ejs');
 
 const logger = (req, res, next) => {
     let url = req.url;
@@ -40,6 +41,26 @@ app.post('/user', logger, (req, res) => {
     // res.json() sends back a json object.
     res.json(userData);
 });
+
+app.get('/users/ejs', (req, res) =>{
+    console.log('Ejs Users');
+    const myusers = [
+        {
+            name: "name1",
+            surname: "surname1",
+            mail: "mail1",
+            sex: "sex1"
+        },
+        {
+            name: "name2",
+            surname: "surname2",
+            mail: "mail2",
+            sex: "sex2"
+        }
+    ]
+
+    res.render('users', {myusers})
+})
 
 
 app.post('/userForm', logger, (req, res)=> { 
